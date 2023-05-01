@@ -80,6 +80,10 @@ public class Campo {
 		minado = true;
 	}
 	
+	public boolean isMinado() {
+		return minado;
+	}
+	
 	public boolean isAberto() {
 		return aberto;
 	}
@@ -96,7 +100,7 @@ public class Campo {
 		return coluna;
 	}
 	
-	boolean objetivoAlcancado() {
+	public boolean objetivoAlcancado() {
 		boolean desvendado = !minado && aberto;
 		boolean protegido = minado && marcado;
 		
