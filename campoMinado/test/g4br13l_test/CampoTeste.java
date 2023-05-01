@@ -1,5 +1,6 @@
 package g4br13l_test;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -27,5 +28,23 @@ public class CampoTeste {
 		boolean reasultado = campo.adicionarVizinho(vizinho);
 		
 		assertTrue(reasultado);
+	}
+	
+	@Test
+	void testeAlternaMarcacao() {
+		assertFalse(campo.isMarcado());
+	}
+	
+	@Test
+	void testeAlternaValorMarcacao() {
+		campo.alternarMarcacao();
+		assertTrue(campo.isMarcado());
+	}
+	
+	@Test
+	void testeAlternamarcacaoDuasVezes() {
+		campo.alternarMarcacao();
+		campo.alternarMarcacao();
+		assertFalse(campo.isMarcado());
 	}
 }

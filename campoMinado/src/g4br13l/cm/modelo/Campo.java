@@ -3,6 +3,8 @@ package g4br13l.cm.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import g4br13l.cm.excecao.ExplosaoException;
+
 public class Campo {
 	
 	//atributos
@@ -43,7 +45,7 @@ public class Campo {
 		
 	}
 	
-	void alternarMarcacao() {
+	public void alternarMarcacao() {
 		if(!aberto) {
 			marcado = !marcado;
 		}
@@ -52,8 +54,25 @@ public class Campo {
 	boolean abrir() {
 		if(!aberto && !marcado) {
 			aberto = true;
+			if(minado) {
+				throw new ExplosaoException();
+			}
+			
+			if(vizinhancaSegura()) {
+				vizinhos.forEach(v -> v.abrir());
+			}
+			return true;
+		}else {
+			return false;
 		}
-		return false;
+		
 	}
 	
+	boolean vizinhancaSegura() {
+		return vizinhos.stream().noneMatch(v -> v.minado);
+	}
+	
+	public boolean isMarcado() {
+		return marcado;
+	}
 }
