@@ -47,4 +47,42 @@ public class CampoTeste {
 		campo.alternarMarcacao();
 		assertFalse(campo.isMarcado());
 	}
+	
+	@Test
+	void testeAbrirNaoMinadoNaoMarcado() {
+		assertTrue(campo.abrir());
+	}
+	
+	@Test
+	void testeAbrirNaoMinadoMarcado() {
+		campo.alternarMarcacao();
+		assertFalse(campo.abrir());
+	}
+	
+	@Test
+	void testeAbrirMinadoMarcado() {
+		campo.alternarMarcacao();
+		campo.minado();
+		assertFalse(campo.abrir());
+	}
+//	@Test
+//	void testeAbrirMinadoNaoMarcado() {
+//		campo.minado();
+//		
+//		assertThrows(ExplosaoException.class, ()->{campo.abrir();});
+//		assertFalse(campo.abrir());
+//	}
+	
+	@Test
+	void testeAbrirComVizinho() {
+		Campo vizinho1 = new Campo(2,2);
+		Campo vizinhoDoVizinho1 = new Campo(1,1);
+		
+		vizinho1.adicionarVizinho(vizinhoDoVizinho1);
+		
+		campo.adicionarVizinho(vizinho1);
+		campo.abrir();
+		
+		assertTrue(campo.isAberto() && vizinho1.isAberto());
+	}
 }
